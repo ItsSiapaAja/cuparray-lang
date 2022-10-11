@@ -1,0 +1,5 @@
+echo "What is your name? ";
+arr_get string 0;
+    echo "Your name is : ";
+    arr_dump string 0;
+    echo "\n";

@@ -1,4 +1,4 @@
-### CupArray : Array Programming Language (EXPERIMENTAL)
+# CupArray : Array Programming Language (EXPERIMENTAL)
 This language is used array, even storing some data.
 
 ## About this language

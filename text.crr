@@ -1,5 +1,14 @@
-echo "What is your name? ";
-arr_get string 0;
-    echo "Your name is : ";
-    arr_dump string 0;
-    echo "\n";
+NEW string "Hello ":0;
+NEW int32 7:0;
+
+arr_dump string 0;
+echo "\n";
+ADD string "World":0;
+arr_dump string 0;
+echo "\n";
+
+ADD int32 7:0;
+arr_dump int32 0;
+echo "\n";
+SUB int32 7:0;
+arr_dump int32 0;

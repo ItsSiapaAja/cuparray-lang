@@ -1,6 +1,4 @@
-#include "InitParser.h"
-
-char* escapeChar(char* text);
+#include "CupArray.h"
 
 int checkDatatype(char* text, int gotoType)
 {
@@ -53,7 +51,7 @@ int checkDatatype(char* text, int gotoType)
     }
 }
 
-int indexNew(char* text, int length)
+int indexMnemonic(char* text, int length, char mode)
 {
     if(isdigit(text[length]))
     {
@@ -72,53 +70,25 @@ int indexNew(char* text, int length)
             return -1;
         }
 
-        if(strcmp(val.datatype, "int32") == 0)
+        int ret;
+        switch (mode)
         {
-            long int temp = atoi(val.stringValue);
-
-            if(temp >= _MAX_INT32_ || temp <= _MAX_INT32_SIGNED_)
-            {
-                OutOfSize();
-                return -1;
-            }
-
-            tape.int32Arr[val.i] = temp;
-        }
-        else if(strcmp(val.datatype, "int64") == 0)
-        {
-            long long int temp = atoi(val.stringValue);
-
-            if(temp >= _MAX_INT64_ || temp <= _MAX_INT64_SIGNED_)
-            {
-                OutOfSize();
-                return -1;
-            }
-
-            tape.int64Arr[val.i] = temp;
-        }
-        else if(strcmp(val.datatype, "int16") == 0)
-        {
-            short temp = atoi(val.stringValue);
-
-            if(temp >= _MAX_INT16_ || temp <= _MAX_INT16_SIGNED_)
-            {
-                OutOfSize();
-                return -1;
-            }
-
-            tape.int16Arr[val.i] = temp;
-        }
-        else if(strcmp(val.datatype, "char") == 0)
-        {
-            char temp = val.charValue;
-            tape.charArr[val.i] = temp;
-        }
-        else if(strcmp(val.datatype, "string") == 0)
-        {
-            strcpy(val.stringValue, escapeChar(val.stringValue));
-            strcpy(tape.stringArr[val.i], val.stringValue);
+        case '=':
+            ret = newMnemonic();
+            break;
+        case '+':
+            ret = addMnemonic();
+            break;
+        case '-':
+            ret = subMnemonic();
+            break;
         }
         
+        if(ret == -1)
+        {
+            return -1;
+        }
+
         strcpy(val.stringValue, "");
         strcpy(val.datatype, "");
         val.i = 0;
@@ -178,7 +148,7 @@ void getArr()
     }
     else if(strcmp(val.datatype, "string") == 0)
     {
-        scanf("%1000[^\n]", val.stringValue);
+        scanf("%999[^\n]", val.stringValue);
         strcpy(tape.stringArr[val.i], val.stringValue);
     }
 }

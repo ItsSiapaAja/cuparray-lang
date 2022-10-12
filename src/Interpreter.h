@@ -3,6 +3,7 @@
 #include <string.h>
 #include "Parser.h"
 #define MAX_LENGTH 255
+#define CUP_LANG 202202L
 
 char keywordBuffer[MAX_LENGTH];
 
@@ -37,28 +38,12 @@ int interpreter(char* textBuffer)
 {
     if(toktype == EMPTY_END || toktype == NOTHING)
     {
-        if(strncmp(textBuffer, "echo", 4) == 0)
-        {
-            toktype = KEYWORD;
-            in = KEYWORD;
-            strcpy(keywordBuffer, textBuffer);
-            return 0;
-        }
-        else if(strncmp(textBuffer, "NEW", 3) == 0)
-        {
-            toktype = KEYWORD;
-            in = KEYWORD;
-            strcpy(keywordBuffer, textBuffer);
-            return 0;
-        }
-        else if(strncmp(textBuffer, "arr_dump", 8) == 0)
-        {
-            toktype = KEYWORD;
-            in = KEYWORD;
-            strcpy(keywordBuffer, textBuffer);
-            return 0;
-        }
-        else if(strncmp(textBuffer, "arr_get", 7) == 0)
+        if(strncmp(textBuffer, "echo", 4) == 0 || 
+        strncmp(textBuffer, "NEW", 3) == 0 || 
+        strncmp(textBuffer, "ADD", 3) == 0 || 
+        strncmp(textBuffer, "SUB", 3) == 0 || 
+        strncmp(textBuffer, "arr_dump", 8) == 0 || 
+        strncmp(textBuffer, "arr_get", 7) == 0)
         {
             toktype = KEYWORD;
             in = KEYWORD;

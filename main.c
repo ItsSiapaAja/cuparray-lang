@@ -9,8 +9,6 @@
 
 #include "src\Read.h"
 
-#define CUP_LANG 202201L
-
 void help()
 {
     printf("CUP ARRAY HELP SECTION\n");

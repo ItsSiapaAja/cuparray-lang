@@ -41,7 +41,7 @@ int echoExec(char* text)
     }
 }
 
-int newExec(char* text)
+int mnemonicExec(char* text, char mode)
 {
     int lengthInput = strlen(text) - 1;
     switch (toktype)
@@ -77,7 +77,7 @@ int newExec(char* text)
     case STRING:
         return stringParse(text);
     case INDEX:
-        return indexNew(text, lengthInput);
+        return indexMnemonic(text, lengthInput, mode);
     case KEYWORD:
         if(strncmp(text, " ", 1) == 0 && 
         (strcmp(val.stringValue, "") == 0 || val.charValue == '\0'))
@@ -164,7 +164,15 @@ int keywordParse(char* textBuffer, char* keyword)
     }
     else if(strncmp(keyword, "NEW", 3) == 0)
     {
-        return newExec(textBuffer);
+        return mnemonicExec(textBuffer, '=');
+    }
+    else if(strncmp(keyword, "ADD", 3) == 0)
+    {
+        return mnemonicExec(textBuffer, '+');
+    }
+    else if(strncmp(keyword, "SUB", 3) == 0)
+    {
+        return mnemonicExec(textBuffer, '-');
     }
     else if(strncmp(keyword, "arr_dump", 8) == 0)
     {

@@ -28,6 +28,7 @@ enum TokenType
     CHAR = 8,
     OPENING_CHAR = 9,
     OPENING_STRING = 10,
+    DOUBLE = 11,
 
     EMPTY_END = 99,
     NOTHING = 999
@@ -46,6 +47,7 @@ struct Values
     char datatype[MAX_LENGTH_TOKS];
     int backslash;
     int sign;
+    int point;
 };
 
 struct Values val;
@@ -57,6 +59,8 @@ struct Tape
     short int16Arr[TAPE_SIZE];
     long int int32Arr[TAPE_SIZE];
     long long int int64Arr[TAPE_SIZE];
+    float floatArr[TAPE_SIZE];
+    double doubleArr[TAPE_SIZE];
 };
 
 struct Tape tape;

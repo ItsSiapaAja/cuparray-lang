@@ -50,6 +50,11 @@ int newMnemonic()
         strcpy(val.stringValue, escapeChar(val.stringValue));
         strcpy(tape.stringArr[val.i], val.stringValue);
     }
+    else if(strcmp(val.datatype, "float") == 0)
+    {
+        float temp = atof(val.stringValue);
+        tape.floatArr[val.i] = temp;
+    }
 }
 
 int addMnemonic()
@@ -118,6 +123,11 @@ int addMnemonic()
         strcpy(val.stringValue, escapeChar(val.stringValue));
         strcat(tape.stringArr[val.i], val.stringValue);
     }
+    else if(strcmp(val.datatype, "float") == 0)
+    {
+        float temp = atof(val.stringValue);
+        tape.floatArr[val.i] += temp;
+    }
 }
 
 int subMnemonic()
@@ -185,5 +195,10 @@ int subMnemonic()
     {
         NotMatchValue();
         return -1;
+    }
+    else if(strcmp(val.datatype, "float") == 0)
+    {
+        float temp = atof(val.stringValue);
+        tape.floatArr[val.i] -= temp;
     }
 }

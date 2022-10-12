@@ -3,7 +3,7 @@
 #include <string.h>
 #include "Parser.h"
 #define MAX_LENGTH 255
-#define CUP_LANG 202202L
+#define CUP_LANG 202203L
 
 char keywordBuffer[MAX_LENGTH];
 

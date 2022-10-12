@@ -1,14 +1,3 @@
-NEW string "Hello ":0;
-NEW int32 7:0;
-
-arr_dump string 0;
-echo "\n";
-ADD string "World":0;
-arr_dump string 0;
-echo "\n";
-
-ADD int32 7:0;
-arr_dump int32 0;
-echo "\n";
-SUB int32 7:0;
-arr_dump int32 0;
+NEW float 0.34:0;
+ADD float 0.3:0;
+arr_dump float 0;

@@ -25,6 +25,12 @@ int checkDatatype(char* text, int gotoType)
             strcpy(val.datatype, text);
             return 0;
         }
+        else if(strncmp(text, "float", 5) == 0)
+        {
+            toktype = FLOAT;
+            strcpy(val.datatype, text);
+            return 0;
+        }
         else
         {
             UnexpectedDatatype();
@@ -35,6 +41,7 @@ int checkDatatype(char* text, int gotoType)
         if(strncmp(text, "int32", 5) == 0 || 
         strncmp(text, "int64", 5) == 0 || 
         strncmp(text, "int16", 5) == 0 || 
+        strncmp(text, "float", 5) == 0 || 
         strncmp(text, "char", 5) == 0 || 
         strncmp(text, "string", 6) == 0)
         {
@@ -93,6 +100,7 @@ int indexMnemonic(char* text, int length, char mode)
         strcpy(val.datatype, "");
         val.i = 0;
         val.sign = 0;
+        val.point = 0;
         val.charValue = '\0';
         return 0;
     }
@@ -125,6 +133,10 @@ void outDump()
     {
         printf("%s", tape.stringArr[val.i]);
     }
+    else if(strcmp(val.datatype, "float") == 0)
+    {
+        printf("%f", tape.floatArr[val.i]);
+    }
 }
 
 int getArr()
@@ -155,6 +167,10 @@ int getArr()
             OutOfSize();
             return -1;
         }
+    }
+    else if(strcmp(val.datatype, "float") == 0)
+    {
+        scanf("%f", &tape.floatArr[val.i]);
     }
     else if(strcmp(val.datatype, "char") == 0)
     {
@@ -213,6 +229,37 @@ int indexDump(char* text, int length, int mode)
     else
     {
         OutOfRange();
+        return -1;
+    }
+}
+
+int floatParse(char* text, int lenght)
+{
+    if(text[lenght - lenght] == '-' && val.sign == 0)
+    {
+        val.sign = 1;
+        strcpy(val.stringValue, text);
+    }
+
+    if(isdigit(text[lenght]))
+    {
+        strcpy(val.stringValue, text);
+        return 1;
+    }
+    else if(strrchr(text, ':'))
+    {
+        toktype = INDEX;
+        return 0;
+    }
+    else if(text[lenght] == '.' && val.point == 0)
+    {
+        val.point = 1;
+        strcpy(val.stringValue, text);
+        return 1;
+    }
+    else
+    {
+        NotMatchValue();
         return -1;
     }
 }

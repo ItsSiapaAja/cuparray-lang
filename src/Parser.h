@@ -76,6 +76,8 @@ int mnemonicExec(char* text, char mode)
         }
     case STRING:
         return stringParse(text);
+    case FLOAT:
+        return floatParse(text, lengthInput);
     case INDEX:
         return indexMnemonic(text, lengthInput, mode);
     case KEYWORD:

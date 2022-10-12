@@ -127,19 +127,34 @@ void outDump()
     }
 }
 
-void getArr()
+int getArr()
 {
     if(strcmp(val.datatype, "int64") == 0)
     {
         scanf("%d", &tape.int64Arr[val.i]);
+        if(tape.int64Arr[val.i] >= _MAX_INT64_ || tape.int64Arr[val.i] <= _MAX_INT64_SIGNED_)
+        {
+            OutOfSize();
+            return -1;
+        }
     }
     else if(strcmp(val.datatype, "int32") == 0)
     {
         scanf("%d", &tape.int32Arr[val.i]);
+        if(tape.int32Arr[val.i] >= _MAX_INT32_ || tape.int32Arr[val.i] <= _MAX_INT32_SIGNED_)
+        {
+            OutOfSize();
+            return -1;
+        }
     }
     else if(strcmp(val.datatype, "int16") == 0)
     {
         scanf("%d", &tape.int16Arr[val.i]);
+        if(tape.int16Arr[val.i] >= _MAX_INT16_ || tape.int16Arr[val.i] <= _MAX_INT16_SIGNED_)
+        {
+            OutOfSize();
+            return -1;
+        }
     }
     else if(strcmp(val.datatype, "char") == 0)
     {
@@ -151,6 +166,8 @@ void getArr()
         scanf("%999[^\n]", val.stringValue);
         strcpy(tape.stringArr[val.i], val.stringValue);
     }
+
+    return 0;
 }
 
 int indexDump(char* text, int length, int mode)
@@ -172,14 +189,20 @@ int indexDump(char* text, int length, int mode)
             return -1;
         }
 
+        int ret;
         switch (mode)
         {
         case 1:
             outDump();
             break;
         case 0:
-            getArr();
+            ret = getArr();
             break;
+        }
+
+        if(ret == -1)
+        {
+            return -1;
         }
 
         val.i = 0;

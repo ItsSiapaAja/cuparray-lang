@@ -29,6 +29,7 @@ enum TokenType
     OPENING_CHAR = 9,
     OPENING_STRING = 10,
     DOUBLE = 11,
+    POINTER = 12,
 
     EMPTY_END = 99,
     NOTHING = 999
@@ -43,6 +44,8 @@ struct Values
     char charValue;
 
     int i;
+    int pointer;
+    int pointerProgress;
     char iChr[MAX_LENGTH_TOKS];
     char datatype[MAX_LENGTH_TOKS];
     int backslash;

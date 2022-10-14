@@ -58,17 +58,22 @@ int checkDatatype(char* text, int gotoType)
     }
 }
 
-int indexMnemonic(char* text, int length, char mode)
+int parseIndex(char mode)
 {
-    if(isdigit(text[length]))
+    switch (toktype)
     {
-        strcpy(val.iChr, text);
-        return 1;
-    }
-    else if(strrchr(text, ';'))
-    {
-        toktype = EMPTY_END;
-        in = EMPTY_END;
+    case POINTER:
+        val.pointer = atoi(val.iChr);
+
+        if(val.pointer >= TAPE_SIZE)
+        {
+            OutOfRange();
+            return -1;
+        }
+
+        toktype = INDEX;
+        return 0;
+    case INDEX:
         val.i = atoi(val.iChr);
 
         if(val.i >= TAPE_SIZE)
@@ -89,6 +94,12 @@ int indexMnemonic(char* text, int length, char mode)
         case '-':
             ret = subMnemonic();
             break;
+        case '*':
+            ret = mulMnemonic();
+            break;
+        case '/':
+            ret = divMnemonic();
+            break;
         }
         
         if(ret == -1)
@@ -102,7 +113,28 @@ int indexMnemonic(char* text, int length, char mode)
         val.sign = 0;
         val.point = 0;
         val.charValue = '\0';
+        val.pointer = 0;
+        val.pointerProgress = 0;
+        toktype = EMPTY_END;
+        in = EMPTY_END;
         return 0;
+    }
+}
+
+int indexMnemonic(char* text, int length, char mode)
+{
+    if(isdigit(text[length]))
+    {
+        strcpy(val.iChr, text);
+        return 1;
+    }
+    else if(strrchr(text, ';') && toktype != POINTER)
+    {
+        return parseIndex(mode);
+    }
+    else if(strrchr(text, ':') && toktype == POINTER)
+    {
+        return parseIndex(mode);
     }
     else
     {
@@ -266,6 +298,13 @@ int floatParse(char* text, int lenght)
 
 int integerParse(char* text, int length)
 {
+    if(text[length - length] == '*')
+    {
+        toktype = POINTER;
+        val.pointerProgress = 1;
+        return 0;
+    }
+
     if(text[length - length] == '-' && val.sign == 0)
     {
         val.sign = 1;

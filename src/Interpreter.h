@@ -3,7 +3,7 @@
 #include <string.h>
 #include "Parser.h"
 #define MAX_LENGTH 255
-#define CUP_LANG 202203L
+#define CUP_LANG 202204L
 
 char keywordBuffer[MAX_LENGTH];
 
@@ -42,6 +42,8 @@ int interpreter(char* textBuffer)
         strncmp(textBuffer, "NEW", 3) == 0 || 
         strncmp(textBuffer, "ADD", 3) == 0 || 
         strncmp(textBuffer, "SUB", 3) == 0 || 
+        strncmp(textBuffer, "MUL", 3) == 0 || 
+        strncmp(textBuffer, "DIV", 3) == 0 || 
         strncmp(textBuffer, "arr_dump", 8) == 0 || 
         strncmp(textBuffer, "arr_get", 7) == 0)
         {

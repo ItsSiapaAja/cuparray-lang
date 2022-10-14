@@ -80,6 +80,8 @@ int mnemonicExec(char* text, char mode)
         return floatParse(text, lengthInput);
     case INDEX:
         return indexMnemonic(text, lengthInput, mode);
+    case POINTER:
+        return indexMnemonic(text, lengthInput, mode);
     case KEYWORD:
         if(strncmp(text, " ", 1) == 0 && 
         (strcmp(val.stringValue, "") == 0 || val.charValue == '\0'))
@@ -175,6 +177,14 @@ int keywordParse(char* textBuffer, char* keyword)
     else if(strncmp(keyword, "SUB", 3) == 0)
     {
         return mnemonicExec(textBuffer, '-');
+    }
+    else if(strncmp(keyword, "MUL", 3) == 0)
+    {
+        return mnemonicExec(textBuffer, '*');
+    }
+    else if(strncmp(keyword, "DIV", 3) == 0)
+    {
+        return mnemonicExec(textBuffer, '/');
     }
     else if(strncmp(keyword, "arr_dump", 8) == 0)
     {

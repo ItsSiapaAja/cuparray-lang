@@ -335,6 +335,18 @@ int mulMnemonic()
 {
     if(strcmp(val.datatype, "int32") == 0)
     {
+        if(val.pointerProgress == 1)
+        {
+            tape.int32Arr[val.i] *= tape.int32Arr[val.pointer];
+
+            if(tape.int32Arr[val.i] >= _MAX_INT32_ || tape.int32Arr[val.i] <= _MAX_INT32_SIGNED_)
+            {
+                OutOfSize();
+                return -1;
+            }
+            return 0;
+        }
+
         long int temp = atoi(val.stringValue);
 
         if(temp >= _MAX_INT32_ || temp <= _MAX_INT32_SIGNED_)
@@ -353,6 +365,18 @@ int mulMnemonic()
     }
     else if(strcmp(val.datatype, "int64") == 0)
     {
+        if(val.pointerProgress == 1)
+        {
+            tape.int64Arr[val.i] -= tape.int64Arr[val.pointer];
+
+            if(tape.int64Arr[val.i] >= _MAX_INT64_ || tape.int64Arr[val.i] <= _MAX_INT64_SIGNED_)
+            {
+                OutOfSize();
+                return -1;
+            }
+            return 0;
+        }
+
         long long int temp = atoi(val.stringValue);
 
         if(temp >= _MAX_INT64_ || temp <= _MAX_INT64_SIGNED_)
@@ -371,6 +395,18 @@ int mulMnemonic()
     }
     else if(strcmp(val.datatype, "int16") == 0)
     {
+        if(val.pointerProgress == 1)
+        {
+            tape.int16Arr[val.i] -= tape.int16Arr[val.pointer];
+
+            if(tape.int16Arr[val.i] >= _MAX_INT16_ || tape.int16Arr[val.i] <= _MAX_INT16_SIGNED_)
+            {
+                OutOfSize();
+                return -1;
+            }
+            return 0;
+        }
+
         short temp = atoi(val.stringValue);
 
         if(temp >= _MAX_INT16_ || temp <= _MAX_INT16_SIGNED_)
@@ -399,6 +435,12 @@ int mulMnemonic()
     }
     else if(strcmp(val.datatype, "float") == 0)
     {
+        if(val.pointerProgress == 1)
+        {
+            tape.floatArr[val.i] -= tape.floatArr[val.pointer];
+            return 0;
+        }
+
         float temp = atof(val.stringValue);
         tape.floatArr[val.i] *= temp;
     }
@@ -408,6 +450,18 @@ int divMnemonic()
 {
     if(strcmp(val.datatype, "int32") == 0)
     {
+        if(val.pointerProgress == 1)
+        {
+            tape.int32Arr[val.i] -= tape.int32Arr[val.pointer];
+
+            if(tape.int32Arr[val.i] >= _MAX_INT32_ || tape.int32Arr[val.i] <= _MAX_INT32_SIGNED_)
+            {
+                OutOfSize();
+                return -1;
+            }
+            return 0;
+        }
+
         long int temp = atoi(val.stringValue);
 
         if(temp >= _MAX_INT32_ || temp <= _MAX_INT32_SIGNED_)
@@ -426,6 +480,18 @@ int divMnemonic()
     }
     else if(strcmp(val.datatype, "int64") == 0)
     {
+        if(val.pointerProgress == 1)
+        {
+            tape.int64Arr[val.i] -= tape.int64Arr[val.pointer];
+
+            if(tape.int64Arr[val.i] >= _MAX_INT64_ || tape.int64Arr[val.i] <= _MAX_INT64_SIGNED_)
+            {
+                OutOfSize();
+                return -1;
+            }
+            return 0;
+        }
+
         long long int temp = atoi(val.stringValue);
 
         if(temp >= _MAX_INT64_ || temp <= _MAX_INT64_SIGNED_)
@@ -444,6 +510,18 @@ int divMnemonic()
     }
     else if(strcmp(val.datatype, "int16") == 0)
     {
+        if(val.pointerProgress == 1)
+        {
+            tape.int16Arr[val.i] -= tape.int16Arr[val.pointer];
+
+            if(tape.int16Arr[val.i] >= _MAX_INT16_ || tape.int16Arr[val.i] <= _MAX_INT16_SIGNED_)
+            {
+                OutOfSize();
+                return -1;
+            }
+            return 0;
+        }
+
         short temp = atoi(val.stringValue);
 
         if(temp >= _MAX_INT16_ || temp <= _MAX_INT16_SIGNED_)
@@ -472,6 +550,12 @@ int divMnemonic()
     }
     else if(strcmp(val.datatype, "float") == 0)
     {
+        if(val.pointerProgress == 1)
+        {
+            tape.floatArr[val.i] -= tape.floatArr[val.pointer];
+            return 0;
+        }
+
         float temp = atof(val.stringValue);
         tape.floatArr[val.i] /= temp;
     }

@@ -3,7 +3,7 @@
  * CUP ARRAY
  * 
  * Created by ItsSiapaAja
- * Version 202206 (CUR-BETA-06)
+ * Version 202207 (CUR-BETA-07)
  * 
  ***********************************/
 

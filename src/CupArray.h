@@ -608,6 +608,12 @@ int equalToLogic()
 
         }
         else if(bools.first == 1 && 
+        strcmp(bools.operand_dt[0], "float") == 0 && 
+        tape.floatArr[bools.operand_i[0]] == tape.floatArr[bools.operand_i[1]])
+        {
+
+        }
+        else if(bools.first == 1 && 
         strcmp(bools.operand_dt[0], "char") == 0 && 
         tape.charArr[bools.operand_i[0]] == tape.charArr[bools.operand_i[1]])
         {
@@ -660,8 +666,71 @@ int greaterThanLogic()
 
         }
         else if(bools.first == 1 && 
-        strcmp(bools.operand_dt[0], "char") == 0 && 
-        tape.charArr[bools.operand_i[0]] == tape.charArr[bools.operand_i[1]])
+        strcmp(bools.operand_dt[0], "float") == 0 && 
+        tape.floatArr[bools.operand_i[0]] > tape.floatArr[bools.operand_i[1]])
+        {
+
+        }
+        else if(bools.first == 1 && 
+        strcmp(bools.operand_dt[0], "char") == 0)
+        {
+            NotMatchingOperand();
+            return -1;
+        }
+        else
+        {
+            bools.equalTo[bools.i] = 0;
+            return 0;
+        }
+
+        bools.greaterThan[bools.i] = 1;
+        bools.i++;
+        return 0;
+    }
+    else
+    {
+        bools.greaterThan[bools.i] = 0;
+        return 0;
+    }
+}
+
+int lessThanLogic()
+{
+    if(strcmp(bools.operand_dt[0], bools.operand_dt[1]) == 0)
+    {
+        bools.first = 1;
+        if(strcmp(bools.operand_dt[0], "string") == 0 && 
+        bools.first == 1)
+        {
+            NotMatchingOperand();
+            return -1;
+        }
+        else if(bools.first == 1 && 
+        strcmp(bools.operand_dt[0], "int32") == 0 && 
+        tape.int32Arr[bools.operand_i[0]] < tape.int32Arr[bools.operand_i[1]])
+        {
+
+        }
+        else if(bools.first == 1 && 
+        strcmp(bools.operand_dt[0], "int64") == 0 && 
+        tape.int64Arr[bools.operand_i[0]] < tape.int64Arr[bools.operand_i[1]])
+        {
+
+        }
+        else if(bools.first == 1 && 
+        strcmp(bools.operand_dt[0], "int16") == 0 && 
+        tape.int16Arr[bools.operand_i[0]] < tape.int16Arr[bools.operand_i[1]])
+        {
+
+        }
+        else if(bools.first == 1 && 
+        strcmp(bools.operand_dt[0], "float") == 0 && 
+        tape.floatArr[bools.operand_i[0]] < tape.floatArr[bools.operand_i[1]])
+        {
+
+        }
+        else if(bools.first == 1 && 
+        strcmp(bools.operand_dt[0], "char") == 0)
         {
             NotMatchingOperand();
             return -1;

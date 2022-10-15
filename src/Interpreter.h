@@ -3,7 +3,7 @@
 #include <string.h>
 #include "Parser.h"
 #define MAX_LENGTH 255
-#define CUP_LANG 202206L
+#define CUP_LANG 202207L
 
 char keywordBuffer[MAX_LENGTH];
 
@@ -58,7 +58,8 @@ int interpreter(char* textBuffer)
             return 0;
         }
         else if(strncmp(textBuffer, "EQ", 2) == 0 || 
-        strncmp(textBuffer, "GT", 2) == 0)
+        strncmp(textBuffer, "GT", 2) == 0 || 
+        strncmp(textBuffer, "LT", 2) == 0)
         {
             toktype = LOGICAL;
             in = LOGICAL;

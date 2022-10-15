@@ -152,6 +152,8 @@ int indexTwoLogical(char* text, int length, char mode)
             return equalToLogic();
         case '>':
             return greaterThanLogic();
+        case '<':
+            return lessThanLogic();
         }
     }
     else

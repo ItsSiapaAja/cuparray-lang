@@ -203,6 +203,10 @@ int logicalParse(char* textBuffer, char* keyword)
     {
         return twoOperandExec(textBuffer, '>');
     }
+    else if(strcmp(keyword, "LT") == 0)
+    {
+        return twoOperandExec(textBuffer, '<');
+    }
 }
 
 // Keyword parser

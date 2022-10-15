@@ -121,6 +121,46 @@ int parseIndex(char mode)
     }
 }
 
+int indexTwoLogical(char* text, int length, char mode)
+{
+    if(isdigit(text[length]))
+    {
+        strcpy(val.iChr, text);
+        return 1;
+    }
+    else if(strrchr(text, ' ') && bools.arg < 1)
+    {
+        bools.arg++;
+        bools.operand_i[bools.arg - 1] = atoi(val.iChr);
+        strcpy(bools.operand_dt[bools.arg - 1], val.datatype);
+
+        toktype = DATATYPE;
+        return 0;
+    }
+    else if(strrchr(text, ';') && bools.arg == 1)
+    {
+        bools.arg++;
+        bools.operand_i[bools.arg - 1] = atoi(val.iChr);
+        strcpy(bools.operand_dt[bools.arg - 1], val.datatype);
+
+        toktype = EMPTY_END;
+        in = EMPTY_END;
+
+        switch (mode)
+        {
+        case '=':
+            return equalToLogic();
+        case '>':
+            return greaterThanLogic();
+        }
+    }
+    else
+    {
+        OutOfRange();
+        return -1;
+    }
+}
+
 int indexMnemonic(char* text, int length, char mode)
 {
     if(isdigit(text[length]))

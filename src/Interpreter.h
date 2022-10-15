@@ -3,7 +3,7 @@
 #include <string.h>
 #include "Parser.h"
 #define MAX_LENGTH 255
-#define CUP_LANG 202204L
+#define CUP_LANG 202206L
 
 char keywordBuffer[MAX_LENGTH];
 
@@ -32,6 +32,11 @@ void clearTape()
     strcpy(val.iChr, "");
     val.sign = 0;
     strcpy(val.stringValue, "");
+    bools.arg = 0;
+    bools.first = 0;
+    memset(bools.operand_dt, 0, 2);
+    memset(bools.operand_i, 0, 2);
+    bools.second = 0;
 }
 
 int interpreter(char* textBuffer)
@@ -52,6 +57,14 @@ int interpreter(char* textBuffer)
             strcpy(keywordBuffer, textBuffer);
             return 0;
         }
+        else if(strncmp(textBuffer, "EQ", 2) == 0 || 
+        strncmp(textBuffer, "GT", 2) == 0)
+        {
+            toktype = LOGICAL;
+            in = LOGICAL;
+            strcpy(keywordBuffer, textBuffer);
+            return 0;
+        }
         else if(strncmp(textBuffer, "\n", 1) == 0 || strncmp(textBuffer, " ", 1) == 0)
         {
             return 0;
@@ -65,6 +78,10 @@ int interpreter(char* textBuffer)
     else if(toktype == KEYWORD || in == KEYWORD)
     {
         return keywordParse(textBuffer, keywordBuffer);
+    }
+    else if(toktype == LOGICAL || in == LOGICAL)
+    {
+        return logicalParse(textBuffer, keywordBuffer);
     }
 
     toktype = EMPTY_END;

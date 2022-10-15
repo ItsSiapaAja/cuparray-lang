@@ -1,3 +1,3 @@
-NEW int32 5:1;
-MUL int32 *1:1;
-arr_dump int32 1;
+NEW string "Hello":1;
+NEW string "Hello":3;
+GT int32:1 int32:4;

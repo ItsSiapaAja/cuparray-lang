@@ -31,6 +31,8 @@ enum TokenType
     DOUBLE = 11,
     POINTER = 12,
 
+    LOGICAL = 13,
+
     EMPTY_END = 99,
     NOTHING = 999
 };
@@ -52,6 +54,24 @@ struct Values
     int sign;
     int point;
 };
+
+struct Booleans
+{
+    char operand_dt[2][MAX_LENGTH_TOKS];
+    int operand_i[2];
+
+    int first;
+    int second;
+
+    int equalTo[TAPE_SIZE];
+    int greaterThan[TAPE_SIZE];
+    int lessThan[TAPE_SIZE];
+    
+    int arg;
+    int i;
+};
+
+struct Booleans bools;
 
 struct Values val;
 

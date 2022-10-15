@@ -10,6 +10,7 @@
  * 
 *******************************/
 
+// Echo command
 int echoExec(char* text)
 {
     if(toktype == STRING)
@@ -41,6 +42,7 @@ int echoExec(char* text)
     }
 }
 
+// Executing a mnemonic keyword
 int mnemonicExec(char* text, char mode)
 {
     int lengthInput = strlen(text) - 1;
@@ -104,6 +106,7 @@ int mnemonicExec(char* text, char mode)
     }
 }
 
+// arr_dump for outputting an array value
 int arrDumpExec(char* text)
 {
     int lengthInput = strlen(text) - 1;
@@ -132,6 +135,7 @@ int arrDumpExec(char* text)
     }
 }
 
+// arr_get for getting user input
 int arrGetExec(char* text)
 {
     int lengthInput = strlen(text) - 1;
@@ -160,6 +164,48 @@ int arrGetExec(char* text)
     }
 }
 
+// Executing two operand
+int twoOperandExec(char* text, char mode)
+{
+    int length = strlen(text) - 1;
+    switch (toktype)
+    {
+    case DATATYPE:
+        if(text[length] == ':')
+        {
+            text[length] = '\0';
+            return checkDatatype(text, 0);
+        }
+        else
+        {
+            return 1;
+        }
+    case INDEX:
+        return indexTwoLogical(text, length, mode);
+    case LOGICAL:
+        if(strncmp(text, " ", 1) == 0)
+        {
+            toktype = DATATYPE;
+            return 0;
+        }
+        break;
+    }
+}
+
+// Logical operation
+int logicalParse(char* textBuffer, char* keyword)
+{
+    if(strcmp(keyword, "EQ") == 0)
+    {
+        return twoOperandExec(textBuffer, '=');
+    }
+    else if(strcmp(keyword, "GT") == 0)
+    {
+        return twoOperandExec(textBuffer, '>');
+    }
+}
+
+// Keyword parser
 int keywordParse(char* textBuffer, char* keyword)
 {
     if(strncmp(keyword, "echo", 4) == 0)

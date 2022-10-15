@@ -62,3 +62,9 @@ void WrongInput()
     strcpy(errorMessage, "Cup_Interpreter : Wrong input");
     printf("%s\n", errorMessage);
 }
+
+void NotMatchingOperand()
+{
+    strcpy(errorMessage, "Cup_Interpreter : Not matching operands");
+    printf("%s\n", errorMessage);
+}
